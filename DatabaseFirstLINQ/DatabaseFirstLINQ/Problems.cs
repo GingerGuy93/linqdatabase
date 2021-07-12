@@ -19,10 +19,10 @@ namespace DatabaseFirstLINQ
             //ProblemTwo();
             //ProblemThree();
             //ProblemFour();
-            ProblemFive();
+            //ProblemFive();
             //ProblemSix();
             //ProblemSeven();
-            //ProblemEight();
+            ProblemEight();
             //ProblemNine();
             //ProblemTen();
             //ProblemEleven();
@@ -100,12 +100,21 @@ namespace DatabaseFirstLINQ
                 Console.WriteLine(date.Email + " " + date.RegistrationDate);
             }
         }
-
+        
         private void ProblemSix()
         {
             // Write a LINQ query that gets all of the users who registered AFTER 2016 and BEFORE 2018
             // Then print each user's email and registration date to the console.
+            var user = _context.Users;
+            DateTime beforeDate = new DateTime(2017, 1, 1);
+            DateTime afterDatte = new DateTime(2018, 1, 1);
 
+            var dates = user.Where(u => u.RegistrationDate > beforeDate && u.RegistrationDate < afterDatte);
+
+            foreach (var date in dates)
+            {
+                Console.WriteLine(date.Email + " " + date.RegistrationDate);
+            }
         }
 
         // <><><><><><><><> R Actions (Read) with Foreign Keys <><><><><><><><><>
@@ -125,7 +134,11 @@ namespace DatabaseFirstLINQ
         {
             // Write a LINQ query that retreives all of the products in the shopping cart of the user who has the email "afton@gmail.com".
             // Then print the product's name, price, and quantity to the console.
-
+            var customerUsers = _context.ShoppingCarts.Include(ur => ur.Product).Include(ur => ur.User).Where(ur => ur.User.Email == "afton@gmail.com");
+            foreach (ShoppingCart shoppingCart in customerUsers)
+            {
+                Console.WriteLine($"Product Name: {shoppingCart.Product.Name} Price: {shoppingCart.Product.Price} Quantity: {shoppingCart.Quantity}");
+            }
         }
 
         private void ProblemNine()
