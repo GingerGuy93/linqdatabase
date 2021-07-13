@@ -24,9 +24,9 @@ namespace DatabaseFirstLINQ
             //ProblemSeven();
             //ProblemEight();
             //ProblemNine();
-            ProblemTen();
+            //ProblemTen();
             //ProblemEleven();
-            //ProblemTwelve();
+            ProblemTwelve();
             //ProblemThirteen();
             //ProblemFourteen();
             //ProblemFifteen();
@@ -159,7 +159,7 @@ namespace DatabaseFirstLINQ
 
             foreach (var shopping in employees)
             {
-                Console.WriteLine(shopping.User.Email + " " + shopping.Product.Name + " " + shopping.Product.Price + " " + shopping.Quantity);
+                Console.WriteLine(shopping.User.Email + " " + shopping.Product.Name + " " + shopping.Product.Price + " " + shopping.Quantity);      
             }
         }
 
@@ -182,7 +182,14 @@ namespace DatabaseFirstLINQ
         private void ProblemTwelve()
         {
             // Create a new Product object and add that product to the Products table using LINQ.
-
+            Product newProduct = new Product()
+            {
+                Name = "Monopoly",
+                Description = "The most angering game in the world",
+                Price = 20
+            };
+            _context.Products.Add(newProduct);
+            _context.SaveChanges();
         }
 
         private void ProblemThirteen()
